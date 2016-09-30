@@ -1,0 +1,28 @@
+{
+  "name": "cric_api",
+  "version": "1.0.0",
+  "description": "\"an application using hapijs and mongoDB\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikGangadhar/CriApi.git"
+  },
+  "author": "Karthik.G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarthikGangadhar/CriApi/issues"
+  },
+  "homepage": "https://github.com/KarthikGangadhar/CriApi#readme",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "good": "^6.0.0",
+    "good-console": "^5.0.0",
+    "hapi": "^8.5.1",
+    "hapi-swagger": "0.7.3",
+    "joi": "^6.4.2",
+    "node-rest-client": "^2.0.1"
+  }
+}
