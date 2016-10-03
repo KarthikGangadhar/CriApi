@@ -1,6 +1,5 @@
 'use strict';
 
-var HTTPrequest = require('request');
 var Promise = require('bluebird');
 var Client = require('node-rest-client').Client;
 var client = new Client();

@@ -4,7 +4,7 @@ module.exports = function (server, options) {
 
 server.route({
     method: 'GET',
-    path: '/api/allscore',
+    path: '/api/score',
     config: {
         tags: ['api'],
         description: 'Get Live cricket scores',
