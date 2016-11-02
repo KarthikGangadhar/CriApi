@@ -16,13 +16,10 @@ function Cricket_Live_Scores(request) {
 
             client.get(url, function (error, data, response) {
                 if (error) {
-                    console.log(error);
                     resolve(error);
                 } else if (data) {
-                    console.log(data);
                     resolve(data);
                 } else {
-                    console.log(response);
                     resolve(response);
                 }
 
