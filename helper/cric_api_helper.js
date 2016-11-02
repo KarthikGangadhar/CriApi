@@ -40,13 +40,10 @@ function Cricket_Particular_Match_Score(request) {
             url = 'http://cricapi.com/api/cricketScore?unique_id=' + request.unique_id;
             client.get(url, function (error, data, response) {
                 if (error) {
-                    console.log(error);
                     resolve(error);
                 } else if (data) {
-                    console.log(data);
                     resolve(data);
                 } else {
-                    console.log(response);
                     resolve(response);
                 }
 
@@ -67,13 +64,10 @@ function Cricket_Live_News(request) {
             url = 'http://cricapi.com/api/cricketNews';
             client.get(url, function (error, data, response) {
                 if (error) {
-                    console.log(error);
                     resolve(error);
                 } else if (data) {
-                    console.log(data);
                     resolve(data);
                 } else {
-                    console.log(response);
                     resolve(response);
                 }
 
@@ -94,13 +88,10 @@ function Cricket_Live_Commentry(request) {
             url = 'http://cricapi.com/api/cricketCommentary?unique_id='+request.unique_id;
             client.get(url, {timeout:2000000},function (error, data, response) {
                 if (error) {
-                    console.log(error);
                     resolve(error);
                 } else if (data) {
-                    console.log(data);
                     resolve(data);
                 } else {
-                    console.log(response);
                     resolve(response);
                 }
             });
