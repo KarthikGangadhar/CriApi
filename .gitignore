@@ -1,2 +1,7 @@
-.gitignore
-node_modules
+# LAB
+.coverData/
+.coverrun
+reports/
+
+# NODE
+node_modules/
