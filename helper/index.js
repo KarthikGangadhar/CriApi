@@ -6,6 +6,9 @@ exports.register = function (server, options, next) {
     require('../endpoints/get_score_by_id.js')(server,options);
     require('../endpoints/get_commentry.js')(server,options);
     require('../endpoints/get_news_by_id.js')(server,options);
+    require('../endpoints/matches.js')(server, options);
+    require('../endpoints/cricket.js')(server, options);
+    require('../endpoints/cricketScore.js')(server, options);    
     next();
 };
 

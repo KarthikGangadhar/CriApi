@@ -1,7 +1,7 @@
-SET CRIC_API_URL=http://cricapi.com/api/
-SET CRIC_API_PORT=1729
-SET CRIC_LIVE_SCORE_URL=http://cricapi.com/api/cricket
-SET CRIC_MATCH_SCORE_API_URL =http://cricapi.com/api/cricketScore?unique_id=
-SET CRIC_NEWS_API_URL =http://cricapi.com/api/cricketNews
-SET CRIC_COMMENTRY_API_URL=http://cricapi.com/api/cricketCommentary?unique_id=
+SET CRIC_API_URL=http://cricapi.com/api;
+SET CRIC_API_MATCHES=/api/matches;
+SET CRIC_API_CRICKET=/api/cricket;
+SET CRIC_API_CRICKETSCORE=/api/cricketScore;
+SET CRIC_API_MATCHCALENDER=/api/matchCalendar;
+SET CRIC_API_PLAYERSTATS=/api/playerStats;
 node server.js
