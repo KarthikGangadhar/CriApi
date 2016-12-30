@@ -23,7 +23,7 @@ lab.experiment('Endpoints: ', function () {
 
     lab.experiment('Unit Tests: ', function () {
         lab.test('get all cricket score', function (done) {
-                helpers.get('/api/score', function (response) {
+                helpers.get('/api/cricket', function (response) {
                     var result = response.result;
                     expect(result).to.be.a('object');
                     expect(result.data).to.be.a('object');

@@ -25,8 +25,8 @@ lab.experiment('Endpoints: ', function () {
     });
 
     lab.experiment('Unit Tests: ', function () {
-        lab.test('get commentry',{ timeout: 10000}, function (done) {
-            helpers.get('/api/score', function (response) {
+        lab.test('get commentry',{ timeout: 100000}, function (done) {
+            helpers.get('/api/cricket', function (response) {
                 var result = response.result;
                 expect(result).to.be.a('object');
                 expect(result.data).to.be.a('object');

@@ -22,17 +22,17 @@ lab.experiment('Endpoints: ', function () {
     });
 
     lab.experiment('Unit Tests: ', function () {
-        lab.test('get all news', function (done) {
-                helpers.get('/api/news', function (response) {
-                    var result = response.result;
-                    expect(result).to.be.a('object');
-                    expect(result.data).to.be.a('object');
-                    var data = result.data.data;   
-                    expect(data).to.be.a('array');
-                    expect(data[0]).to.be.a('object');
-                    expect(data[0].unique_id);
-                    done();
-                });
+        lab.test('get all news', { timeout: 1000000 }, function (done) {
+            helpers.get('/api/news', function (response) {
+                var result = response.result;
+                expect(result).to.be.a('object');
+                expect(result.data).to.be.a('object');
+                var data = result.data.data;
+                expect(data).to.be.a('array');
+                expect(data[0]).to.be.a('object');
+                expect(data[0].unique_id);
+                done();
+            });
         });
     });
 

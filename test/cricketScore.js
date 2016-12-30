@@ -6,8 +6,8 @@ var expect = require('chai').expect;
 var helpers = require('./test_helper.js');
 var sinon = require('sinon');
 var PostInput = {
-    unique_id: ""
-};
+    "unique_id": "936147"
+}
 
 lab.experiment('Endpoints: ', function () {
     var sandbox;
@@ -25,21 +25,11 @@ lab.experiment('Endpoints: ', function () {
     });
 
     lab.experiment('Unit Tests: ', function () {
-        lab.test('get news by id', { timeout: 100000 }, function (done) {
-            helpers.get('/api/news', function (response) {
-                var result = response.result;
+        lab.test('get CricketScore', { timeout: 100000 }, function (done) {
+            helpers.post('/api/cricketScore', PostInput, function (post_response) {
+                var result = post_response.result;
                 expect(result).to.be.a('object');
-                expect(result.data).to.be.a('object');
-                var data = result.data.data;
-                expect(data).to.be.a('array');
-                expect(data[0]).to.be.a('object');
-                expect(data[0].unique_id);
-                PostInput.unique_id = data[0].unique_id;
-                helpers.post('/api/news', PostInput, function (post_response) {
-                    var result = post_response.result;
-                    expect(result).to.be.a('object');
-                    done();
-                });
+                done();
             });
         });
     });
