@@ -17,11 +17,13 @@ module.exports = function (server, options) {
             }
         },
         handler: function (request, reply) {
-            var options = request.payload;
-            return cric_api_helper.cricket_live_news(options).then(function (return_data) {
+            var options = {
+                call_type: "news"
+            }
+            return cric_api_helper.cricAPICall(options).then(function (return_data) {
                 if (return_data && return_data.data) {
                     var data = return_data.data;
-                    var response = { };
+                    var response = {};
                     for (var count in data) {
                         if (data[count].unique_id === request.payload.unique_id) {
                             response = data[count];

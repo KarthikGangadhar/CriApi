@@ -1,21 +1,24 @@
+var joi = require('joi');
 var cric_api_helper = require('../helper/cric_api_helper.js');
 
 module.exports = function (server, options) {
 
 server.route({
     method: 'GET',
-    path: '/api/score',
+    path: '/api/news',
     config: {
         tags: ['api'],
-        description: 'Get Live cricket scores',
-        notes: 'Get Live cricket scores'
+        description: 'Get updated cricket news',
+        notes: 'Get updated cricket news'
     },
     handler: function (request, reply) {
-        var options = {}
-        return cric_api_helper.cricket_live_scores(options).then(function (return_data) {
+        var options = {
+            call_type:"news"
+        }
+        return cric_api_helper.cricAPICall(options).then(function (return_data) {
             return reply({
                 statusCode: 200,
-                message: 'Live cricket score',
+                message: 'cricket news',
                 data: return_data
             });
         }).catch(function (err) {

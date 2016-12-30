@@ -5,15 +5,12 @@ var Client = require('node-rest-client').Client;
 var apikey = "yiPB2mqlqdNnPa57Vs8P8S74DXk1";
 var client = new Client(apikey);
 var args = {
-    parameters: { apikey: "yiPB2mqlqdNnPa57Vs8P8S74DXk1" },
-    headers: { "apikey": "yiPB2mqlqdNnPa57Vs8P8S74DXk1" },
-    data: "yiPB2mqlqdNnPa57Vs8P8S74DXk1"
+    headers: { "apikey": "yiPB2mqlqdNnPa57Vs8P8S74DXk1" }
 };
 
-
-var GetCricAPIPath = function (call_type, parameters) {
+var GetCricAPIPath = function (parameters) {
     // load the base url;
-
+    var call_type = parameters.call_type;
     var fulfillment_api_path = GetEnvironmentVariableValue('CRIC_API_URL', 'http://cricapi.com');
     var path = '';
     var full_url = '';
@@ -34,43 +31,25 @@ var GetCricAPIPath = function (call_type, parameters) {
     else if (call_type === 'playerStats') {
         path = GetEnvironmentVariableValue('CRIC_API_PLAYERSTATS', '/api/playerStats');
     }
+    else if (call_type === 'commentry') {
+        path = GetEnvironmentVariableValue('CRIC_API_Commentry', '/api/cricketCommentary');
+    }
+    else if (call_type === 'news') {
+        path = GetEnvironmentVariableValue('CRIC_API_NEWS', '/api/cricketNews');
+    }
 
     full_url = fulfillment_api_path + path;
 
     if (typeof parameters !== 'undefined' && parameters !== null) {
         if (parameters.unique_id) {
-            full_url = full_url + '?unique_id=' +parameters.unique_id;
+            full_url = full_url + '?unique_id=' + parameters.unique_id;
         }
         else if (parameters.pid) {
-            full_url = full_url + parameters.pid;
+            full_url = full_url + '?pid=' + parameters.pid;
         }
     }
     return full_url;
 };
-
-function Cricket_Live_Scores(request) {
-    if (!request) {
-        successful_pull = false;
-        return Promise.resolve(successful_pull);
-    }
-    if (request) {
-        return new Promise(function (resolve, reject) {
-            var url = process.env.CRIC_LIVE_SCORE_URL;
-            url = 'http://cricapi.com/api/cricket';
-
-            client.get(url, args, function (error, data, response) {
-                if (error) {
-                    resolve(error);
-                } else if (data) {
-                    resolve(data);
-                } else {
-                    resolve(response);
-                }
-
-            });
-        });
-    }
-}
 
 function CricAPICall(request) {
     if (!request) {
@@ -79,10 +58,7 @@ function CricAPICall(request) {
     }
     if (request) {
         return new Promise(function (resolve, reject) {
-            var url = process.env.CRIC_LIVE_SCORE_URL;
-            url = GetCricAPIPath(request.call_type, request);
-
-            // if (!request.unique_id) {
+            var url = GetCricAPIPath(request);
             client.get(url, args, function (error, data, response) {
                 if (error) {
                     resolve(error);
@@ -92,91 +68,6 @@ function CricAPICall(request) {
                     resolve(response);
                 }
 
-            });
-            // }
-            // else {
-            //     client.post(url, args, function (error, data, response) {
-            //         if (error) {
-            //             resolve(error);
-            //         } else if (data) {
-            //             resolve(data);
-            //         } else {
-            //             resolve(response);
-            //         }
-
-            //     });
-            // }
-
-        });
-    }
-}
-
-function Cricket_Particular_Match_Score(request) {
-    var successful_pull = false;
-    if (!request || !request.unique_id) {
-        successful_pull = false;
-        return Promise.resolve(successful_pull);
-    }
-    if (request) {
-        return new Promise(function (resolve, reject) {
-            var url = process.env.CRIC_MATCH_SCORE_API_URL + request.unique_id;
-            url = 'http://cricapi.com/api/cricketScore?unique_id=' + request.unique_id;
-            client.get(url, args, function (error, data, response) {
-                if (error) {
-                    resolve(error);
-                } else if (data) {
-                    resolve(data);
-                } else {
-                    resolve(response);
-                }
-
-            });
-        });
-    }
-}
-
-function Cricket_Live_News(request) {
-    var successful_pull = false;
-    if (!request) {
-        successful_pull = false;
-        return Promise.resolve(successful_pull);
-    }
-    if (request) {
-        return new Promise(function (resolve, reject) {
-            var url = process.env.CRIC_NEWS_API_URL
-            url = 'http://cricapi.com/api/cricketNews';
-            client.get(url, args, function (error, data, response) {
-                if (error) {
-                    resolve(error);
-                } else if (data) {
-                    resolve(data);
-                } else {
-                    resolve(response);
-                }
-
-            });
-        });
-    }
-}
-
-function Cricket_Live_Commentry(request) {
-    var successful_pull = false;
-    if (!request || !request.unique_id) {
-        successful_pull = false;
-        return Promise.resolve(successful_pull);
-    }
-    if (request) {
-        return new Promise(function (resolve, reject) {
-            var url = process.env.CRIC_COMMENTRY_API_URL + request.unique_id;
-            url = 'http://cricapi.com/api/cricketCommentary?unique_id=' + request.unique_id;
-            client.get(url, args, { timeout: 2000000 }, function (error, data, response) {
-                if (error) {
-                    resolve(error);
-                } else if (data) {
-                    resolve(data);
-                } else {
-                    resolve(response);
-                }
             });
         });
     }
@@ -186,14 +77,8 @@ var GetEnvironmentVariableValue = function (environment_variable_name, default_v
     return process.env[environment_variable_name] || default_value;
 };
 
-
 module.exports = {
-    cricket_live_scores: Cricket_Live_Scores,
-    cricket_particular_match_score: Cricket_Particular_Match_Score,
-    cricket_live_news: Cricket_Live_News,
-    cricket_live_commentry: Cricket_Live_Commentry,
-    getEnvironmentVariableValue: GetEnvironmentVariableValue,
     cricAPICall: CricAPICall,
-
+    getEnvironmentVariableValue: GetEnvironmentVariableValue,
 
 };

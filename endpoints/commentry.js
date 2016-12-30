@@ -18,8 +18,12 @@ module.exports = function (server, options) {
         },
 
         handler: function (request, reply) {
-            var options = request.payload;
-            return cric_api_helper.cricket_live_commentry(options).then(function (return_data) {
+            var options = {
+            call_type:"commentry",
+            unique_id: request.payload.unique_id
+                
+            }
+            return cric_api_helper.cricAPICall(options).then(function (return_data) {
                 return reply({
                     statusCode: 200,
                     message: 'commentry',

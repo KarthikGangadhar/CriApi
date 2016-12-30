@@ -18,12 +18,21 @@ module.exports = function (server, options) {
         },
 
         handler: function (request, reply) {
-            var options = request.payload;
-            return cric_api_helper.cricket_particular_match_score(options).then(function (return_data) {
+            var options = {
+                call_type:"cricket",
+                unique_id: request.payload.unique_id
+            }
+            return cric_api_helper.cricAPICall(options).then(function (return_data) {
+                var filtered_data;
+                return_data.data.forEach(function(field){
+                    if(field.unique_id === request.payload.unique_id){
+                        filtered_data = field;
+                    }
+                })
                 return reply({
                     statusCode: 200,
                     message: 'Live score',
-                    data: return_data
+                    data: filtered_data
                 });
             }).catch(function (err) {
                 return reject({
