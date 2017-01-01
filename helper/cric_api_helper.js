@@ -2,7 +2,7 @@
 
 var Promise = require('bluebird');
 var Client = require('node-rest-client').Client;
-var client = new Client(apikey);
+var client = new Client();
 var args = {
     headers: { "apikey": "yiPB2mqlqdNnPa57Vs8P8S74DXk1" }
 };
