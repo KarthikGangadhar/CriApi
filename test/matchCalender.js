@@ -26,7 +26,6 @@ lab.experiment('Endpoints: ', function () {
             helpers.get('/api/matchCalendar', function (response) {
                 var result = response.result;
                 expect(result).to.be.a('object');
-                console.log(result);
                 expect(result.data).to.be.a('object');
                 done();
             });
