@@ -4,11 +4,12 @@
   "description": "\"an application using hapijs and mongoDB\"",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "lab -t 100 -m 10000 -l -v -c -r console -o stdout -r console -o reports/coverage.txt -r html -o reports/coverage.html -r json -o reports/coverage.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KarthikGangadhar/CriApi.git"
+    "url": "https://github.com/KarthikGangadhar/CriApi.git"
   },
   "author": "Karthik.G",
   "license": "ISC",
@@ -28,5 +29,9 @@
     "lab": "^11.1.0",
     "node-rest-client": "^2.0.1",
     "sinon": "^1.17.6"
+  },
+  "engines": {
+    "node": "6.9.2",
+    "npm": "3.10.9"
   }
 }

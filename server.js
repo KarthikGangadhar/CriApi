@@ -5,7 +5,7 @@ var index = require('./helper/index.js');
 
 // cricAPi - Key 1 yiPB2mqlqdNnPa57Vs8P8S74DXk1 
 server.connection({
-    port: process.env.CRIC_API_PORT || 1729
+    port: process.env.PORT || 1729
 });
 
 server.register([{
