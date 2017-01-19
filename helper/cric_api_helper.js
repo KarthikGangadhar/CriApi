@@ -36,6 +36,9 @@ var GetCricAPIPath = function (parameters) {
     else if (call_type === 'news') {
         path = GetEnvironmentVariableValue('CRIC_API_NEWS', '/api/cricketNews');
     }
+    else if (call_type === 'ballByBall') {
+        path = GetEnvironmentVariableValue('CRIC_API_BALLBYBALL', '/api/ballByBall');
+    }
 
     full_url = fulfillment_api_path + path;
 

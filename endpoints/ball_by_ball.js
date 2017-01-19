@@ -1,31 +1,32 @@
 var Joi = require('joi');
 var cric_api_helper = require('../helper/cric_api_helper.js');
 
-
 module.exports = function (server, options) {
 
     server.route({
         method: 'POST',
-        path: '/api/playerStats',
+        path: '/api/ballByBall',
         config: {
             tags: ['api'],
-            description: 'Get player profile',
-            notes: 'Get Live cricket scores',
+            description: 'Get ballByBall updates',
+            notes: 'Get ballByBall updates',
             validate: {
                 payload: {
-                    pid: Joi.string().required()
+                    unique_id: Joi.string().required()
                 }
             }
         },
+
         handler: function (request, reply) {
             var options = {
-                call_type: 'playerStats',
-                pid: request.payload.pid
+            call_type:"ballByBall",
+            unique_id: request.payload.unique_id
+                
             }
             return cric_api_helper.cricAPICall(options).then(function (return_data) {
                 return reply({
                     statusCode: 200,
-                    message: 'player profile',
+                    message: 'ballByBall details',
                     data: return_data
                 });
             }).catch(function (err) {

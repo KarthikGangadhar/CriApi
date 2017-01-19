@@ -6,6 +6,6 @@ SET CRIC_API_MATCHCALENDER=/api/matchCalendar;
 SET CRIC_API_PLAYERSTATS=/api/playerStats;
 SET CRIC_API_NEWS=/api/cricketNews;
 SET CRIC_API_Commentry=/api/cricketCommentary;
-
+SET CRIC_API_BALLBYBALL=/api/ballByBall;
 node server.js
 

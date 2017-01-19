@@ -7,7 +7,7 @@ module.exports = function (server, options) {
         path: '/api/matchCalendar',
         config: {
             tags: ['api'],
-            description: 'Get Live cricket scores',
+            description: 'Upcoming match schedules',
             notes: 'Get Live cricket scores'
         },
         handler: function (request, reply) {
@@ -17,7 +17,7 @@ module.exports = function (server, options) {
             return cric_api_helper.cricAPICall(options).then(function (return_data) {
                 return reply({
                     statusCode: 200,
-                    message: 'Live cricket score',
+                    message: 'upcoming match schedules',
                     data: return_data
                 });
             }).catch(function (err) {
