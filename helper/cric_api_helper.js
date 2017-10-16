@@ -4,7 +4,7 @@ var Promise = require('bluebird');
 var Client = require('node-rest-client').Client;
 var client = new Client();
 var args = {
-    headers: { "apikey": "yiPB2mqlqdNnPa57Vs8P8S74DXk1" }
+    headers: { "apikey": "" }
 };
 
 var GetCricAPIPath = function (parameters) {
@@ -60,6 +60,7 @@ function CricAPICall(request) {
     }
     if (request) {
         return new Promise(function (resolve, reject) {
+            args["headers"]["apikey"] = request.api_key;
             var url = GetCricAPIPath(request);
             client.get(url, args, function (error, data, response) {
                 if (error) {
