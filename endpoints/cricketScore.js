@@ -25,7 +25,8 @@ module.exports = function (server, options) {
         handler: function (request, reply) {
             var options = {
                 call_type: 'cricketScore',
-                unique_id: request.payload.unique_id
+                unique_id: request.payload.unique_id,
+                api_key: request.query.api_key
             }
             return cric_api_helper.cricAPICall(options).then(function (return_data) {
                 return reply({
