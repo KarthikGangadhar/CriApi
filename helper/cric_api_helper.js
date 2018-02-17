@@ -39,6 +39,15 @@ var GetCricAPIPath = function (parameters) {
     else if (call_type === 'ballByBall') {
         path = GetEnvironmentVariableValue('CRIC_API_BALLBYBALL', '/api/ballByBall');
     }
+    else if(call_type === 'fantasySummary'){
+        path = GetEnvironmentVariableValue('CRIC_API_FANTASYSUMMARY', '/api/fantasySummary');
+    }
+    else if(call_type === 'fantasySquad'){
+        path = GetEnvironmentVariableValue('CRIC_API_FANTASYSUMMARY', '/api/fantasySquad');
+    }
+    else if(call_type === 'fantasySquad'){
+        path = GetEnvironmentVariableValue('CRIC_API_PLAYERFINDER', '/api/playerFinder');
+    }    
 
     full_url = fulfillment_api_path + path;
 
@@ -48,6 +57,9 @@ var GetCricAPIPath = function (parameters) {
         }
         else if (parameters.pid) {
             full_url = full_url + '?pid=' + parameters.pid;
+        }
+        else if (parameters.name) {
+            full_url = full_url + '?name=' + parameters.name;
         }
     }
     return full_url;

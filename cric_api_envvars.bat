@@ -7,5 +7,8 @@ SET CRIC_API_PLAYERSTATS=/api/playerStats;
 SET CRIC_API_NEWS=/api/cricketNews;
 SET CRIC_API_Commentry=/api/cricketCommentary;
 SET CRIC_API_BALLBYBALL=/api/ballByBall;
+SET CRIC_API_FANTASYSUMMARY= /api/fantasySummary;
+SET CRIC_API_FANTASYSQUARD= /api/fantasySquad;
+SET CRIC_API_PLAYERFINDER= /api/playerFinder;
 node server.js
 

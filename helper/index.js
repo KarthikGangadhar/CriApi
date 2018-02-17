@@ -11,7 +11,10 @@ exports.register = function (server, options, next) {
     require('../endpoints/cricketScore.js')(server, options);    
     require('../endpoints/playerStats.js')(server, options);    
     require('../endpoints/matchCalendar.js')(server, options);    
-    require('../endpoints/ball_by_ball.js')(server, options);    
+    require('../endpoints/ball_by_ball.js')(server, options);  
+    require('../endpoints/fantasy_summary.js')(server, options);  
+    require('../endpoints/fantasy_squard.js')(server, options);  
+    require('../endpoints/player_finder.js')(server, options);  
     next();
 };
 
