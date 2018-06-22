@@ -28,11 +28,12 @@ module.exports = function (server, options) {
                 name: request.payload.name,
                 api_key: request.query.api_key
             }
-            return cric_api_helper.cricAPICall(options).then(function (return_data) {
+            return cric_api_helper.postResponse(options).then(function (return_data) {
+                let response_body =  (return_data && return_data.statusCode === 200 && (return_data.body !== undefined || return_data.body !== null)) ? JSON.parse(return_data.body) : {}
                 return reply({
                     statusCode: 200,
                     message: 'Live cricket score',
-                    data: return_data
+                    response: response_body
                 });
             }).catch(function (err) {
                 return reject({

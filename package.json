@@ -28,6 +28,7 @@
     "joi": "^6.4.2",
     "lab": "^11.1.0",
     "node-rest-client": "^2.0.1",
+    "request": "^2.87.0",
     "sinon": "^1.17.6"
   },
   "engines": {
