@@ -29,11 +29,12 @@ module.exports = function (server, options) {
                 api_key: request.query.api_key
             }
             return cric_api_helper.postResponse(options).then(function (return_data) {
-                let response_body =  (return_data && return_data.statusCode === 200 && (return_data.body !== undefined || return_data.body !== null)) ? JSON.parse(return_data.body) : {}
+                let statusCode = (return_data !== null && typeof (return_data) === 'object') ? return_data.statusCode : 200;
+                let body = (return_data !== null && typeof (return_data) === 'object' && return_data.body && typeof (return_data.body) === "string") ? JSON.parse(return_data.body) : {};
                 return reply({
-                    statusCode: 200,
+                    statusCode: statusCode,
                     message: 'Live cricket score',
-                    response: response_body
+                    response: body
                 });
             }).catch(function (err) {
                 return reject({

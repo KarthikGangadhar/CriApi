@@ -27,21 +27,23 @@ module.exports = function (server, options) {
                 api_key: request.query.api_key
             }
             return cric_api_helper.cricAPICall(options).then(function (return_data) {
-                if (return_data && return_data.data) {
-                    var data = return_data.data;
-                    var response = {};
+                let statusCode = (return_data !== null && typeof (return_data) === 'object') ? return_data.statusCode : 200;
+                let body = (return_data !== null && typeof (return_data) === 'object' && return_data.body && typeof (return_data.body) === "string") ? JSON.parse(return_data.body) : {};
+                let response_body = body;
+                if (body && body.data) {
+                    var data = body.data;
                     for (var count in data) {
                         if (data[count].unique_id === request.payload.unique_id) {
-                            response = data[count];
+                            response_body = data[count];
                             break;
                         }
                     }
-                    return reply({
-                        statusCode: 200,
-                        message: 'cricket news',
-                        data: response
-                    });
                 }
+                return reply({
+                    statusCode: statusCode,
+                    message: 'cricket news',
+                    data: response_body
+                });
             }).catch(function (err) {
                 return reject({
                     'error': err.message

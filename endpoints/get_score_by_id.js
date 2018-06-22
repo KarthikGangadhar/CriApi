@@ -30,13 +30,15 @@ module.exports = function (server, options) {
             }
             return cric_api_helper.cricAPICall(options).then(function (return_data) {
                 var filtered_data;
-                return_data.data.forEach(function (field) {
+                let statusCode = (return_data !== null && typeof (return_data) === 'object') ? return_data.statusCode : 200;
+                let body = (return_data !== null && typeof (return_data) === 'object' && return_data.body && typeof (return_data.body) === "string") ? JSON.parse(return_data.body) : {};
+                body.data.forEach(function (field) {
                     if (field.unique_id === request.payload.unique_id) {
                         filtered_data = field;
                     }
                 })
                 return reply({
-                    statusCode: 200,
+                    statusCode: statusCode,
                     message: 'Live score',
                     data: filtered_data
                 });

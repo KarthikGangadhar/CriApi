@@ -29,10 +29,12 @@ module.exports = function (server, options) {
                 api_key: request.query.api_key
             }
             return cric_api_helper.cricAPICall(options).then(function (return_data) {
+                let statusCode = (return_data !== null && typeof (return_data) === 'object') ? return_data.statusCode : 200;
+                let body = (return_data !== null && typeof (return_data) === 'object' && return_data.body && typeof (return_data.body) === "string") ? JSON.parse(return_data.body) : {};
                 return reply({
-                    statusCode: 200,
+                    statusCode: statusCode,
                     message: 'commentry',
-                    data: return_data
+                    data: body
                 });
             }).catch(function (err) {
                 return reject({
