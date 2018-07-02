@@ -1,5 +1,6 @@
 var Joi = require('joi');
 var cric_api_helper = require('../helper/cric_api_helper.js');
+var newsHepler = require('../helper/news_helper');
 
 module.exports = function (server, options) {
 
@@ -19,22 +20,22 @@ module.exports = function (server, options) {
             }
         },
         handler: function (request, reply) {
-            var options = {
-                call_type: "news",
-                api_key: request.query.api_key
-            }
-            return cric_api_helper.cricAPICall(options).then(function (return_data) {
-                let statusCode = (return_data !== null && typeof (return_data) === 'object') ? return_data.statusCode : 200;
-                let body = (return_data !== null && typeof (return_data) === 'object' && return_data.body && typeof (return_data.body) === "string") ? JSON.parse(return_data.body) : {};
-                return reply({
-                    statusCode: statusCode,
-                    message: 'cricket news',
-                    data: body
-                });
+            let newsResponse = {
+                "statusCode": 200,
+                "message": "cricket news",
+                "data": {
+                    "data": []
+                },
+                "provider": {
+                    "source": "Various",
+                    "url": "https://cricapi.com/",
+                }
+            };
+            newsHepler.getNewsData().then((data) => {
+                newsResponse.data.data = data;
+                return reply(newsResponse);
             }).catch(function (err) {
-                return reject({
-                    'error': err.message
-                });
+                return replay(newsResponse);
             });
         }
     });
